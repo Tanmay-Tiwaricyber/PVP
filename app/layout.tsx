@@ -56,10 +56,10 @@ export const viewport: Viewport = {
 
 /**
  * Runs before paint: no flash of the wrong theme.
- * Default is Paper (light) unless the visitor has chosen otherwise or the OS
- * explicitly prefers dark and they have made no choice yet.
+ * Paper is the default — the volume is designed on paper first — and only an
+ * explicit choice by the visitor switches it to Ink.
  */
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}var r=document.documentElement;r.dataset.theme=t;r.classList.toggle('dark',t==='dark');}catch(e){}})();`;
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t='light';}var r=document.documentElement;r.dataset.theme=t;r.classList.toggle('dark',t==='dark');}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

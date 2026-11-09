@@ -3,143 +3,152 @@
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import LocalClock from "./local-clock";
+import BadgeWall from "./badge-wall";
+import ThmSeal from "./thm-seal";
 import { profile } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-/**
- * A title page, set like a printed specimen sheet: an oversized serif name,
- * a rule that behaves like a masthead, and marginal notes instead of padding.
- */
 export default function Cover() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.9], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "9%"]);
+  const fade = useTransform(scrollYProgress, [0, 0.92], [1, 0]);
 
   return (
-    <section id="top" ref={ref} className="relative overflow-hidden pt-16 sm:pt-20">
+    <section id="top" ref={ref} className="relative overflow-hidden pt-14 sm:pt-16">
       <motion.div
         style={reduce ? undefined : { y, opacity: fade }}
-        className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-between py-6"
+        className="shell relative flex min-h-[calc(100svh-4rem)] flex-col justify-between py-5"
       >
-        {/* masthead strip */}
-        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-[var(--rule)] pb-3">
+        {/* masthead */}
+        <div className="flex flex-wrap items-start justify-between gap-2 border-b border-[var(--rule)] pb-2.5">
           <p className="label">Portfolio · Vol. 01 · Kanpur, IN</p>
-          <p className="label">Est. Oct 2021</p>
+          <p className="label hidden sm:block">Est. Oct 2021</p>
           <p className="label hidden sm:block">
             <LocalClock />
           </p>
         </div>
 
-        {/* vertical folio, set along the right margin the way a spine would be */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 lg:block"
-        >
-          <div className="flex items-center gap-3 [writing-mode:vertical-rl]">
-            <span className="h-16 w-px bg-[var(--rule)]" />
-            <span className="label text-[var(--faint)]">
-              Silent Programmer — Portfolio, Volume One
-            </span>
-            <span className="h-16 w-px bg-[var(--rule)]" />
-          </div>
-        </div>
-        <span aria-hidden className="crop absolute inset-x-0 top-24 hidden h-6 lg:block" />
+        <div className="grid flex-1 grid-cols-1 items-center gap-y-8 py-6 lg:grid-cols-12 lg:gap-x-10">
+          {/* ——— left: the title page ——— */}
+          <div className="relative lg:col-span-7">
+            <div className="overflow-hidden">
+              <motion.p
+                initial={{ y: "108%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.1, delay: 1.95, ease: EASE }}
+                className="label text-[var(--ink)]"
+              >
+                {profile.name} <span className="mx-1.5 text-[var(--accent)]">·</span>{" "}
+                {profile.role.split(" · ")[0]}
+              </motion.p>
+            </div>
 
-        {/* the name */}
-        <div className="py-6 sm:py-10">
-          <div aria-hidden className="overflow-hidden">
-            <motion.h1
-              initial={{ y: "104%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 1.5, delay: 1.95, ease: EASE }}
-              className="display text-[clamp(3.6rem,15.5vw,15rem)]"
-            >
-              Tanmay
-            </motion.h1>
-          </div>
-          <div aria-hidden className="overflow-hidden">
-            <motion.p
-              initial={{ y: "104%" }}
-              animate={{ y: "0%" }}
-              transition={{ duration: 1.5, delay: 2.06, ease: EASE }}
-              className="display flex flex-wrap items-baseline gap-x-[0.16em] text-[clamp(3.6rem,15.5vw,15rem)]"
-            >
-              <span>Tiwari</span>
-              <span className="serif-italic text-[0.19em] leading-none text-[var(--accent)]">
-                silent programmer
-              </span>
-            </motion.p>
-          </div>
-          <h1 className="sr-only">
-            Tanmay Tiwari — Silent Programmer. Full-stack engineer and security builder, Kanpur, India.
-          </h1>
+            <div aria-hidden className="mt-1 overflow-hidden">
+              <motion.h1
+                initial={{ y: "104%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.4, delay: 2.02, ease: EASE }}
+                className="display text-[clamp(3.3rem,11.5vw,9.5rem)]"
+              >
+                Tanmay
+              </motion.h1>
+            </div>
+            <div aria-hidden className="overflow-hidden">
+              <motion.p
+                initial={{ y: "104%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.4, delay: 2.1, ease: EASE }}
+                className="display flex flex-wrap items-baseline gap-x-[0.16em] text-[clamp(3.3rem,11.5vw,9.5rem)]"
+              >
+                <span>Tiwari</span>
+                <span className="serif-italic text-[0.2em] leading-none text-[var(--accent)]">
+                  silent programmer
+                </span>
+              </motion.p>
+            </div>
+            <h1 className="sr-only">
+              Tanmay Tiwari — Silent Programmer. Full-stack engineer and security builder, Kanpur,
+              India.
+            </h1>
 
-          {/* rule with marginalia */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1.3, delay: 2.3, ease: EASE }}
-            className="mt-5 h-px origin-left bg-[var(--rule-strong)]"
-          />
-
-          <div className="mt-4 grid gap-5 sm:grid-cols-12 sm:gap-6">
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1.2, delay: 2.32, ease: EASE }}
+              className="mt-4 h-px origin-left bg-[var(--rule-strong)]"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 2.42, ease: EASE }}
-              className="sm:col-span-7"
+              transition={{ duration: 0.9, delay: 2.44, ease: EASE }}
+              className="mt-4 max-w-[46ch]"
             >
-              <p className="dropcap text-[clamp(0.95rem,1.5vw,1.15rem)] leading-[1.55] text-[var(--ink)]/85">
+              <p className="dropcap text-[clamp(0.92rem,1.35vw,1.06rem)] leading-[1.6] text-[var(--ink)]/85">
                 I build software that respects the person using it — fast, private by default, and
                 finished enough to survive a real deadline. Six years of public repositories, a
                 top-1% security record, and a habit of shipping the hard part first.
               </p>
             </motion.div>
 
-            <motion.dl
+            <motion.div
+              initial={{ opacity: 0, scale: 0.94, rotate: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 2.5, ease: EASE }}
+              className="pointer-events-none absolute bottom-2 right-2 hidden -rotate-[9deg] xl:block"
+            >
+              <ThmSeal size={96} />
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 2.55 }}
-              className="sm:col-span-5 sm:pl-6 sm:border-l sm:border-[var(--rule)]"
+              transition={{ duration: 0.9, delay: 2.56 }}
+              className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3"
             >
-              {[
-                ["Discipline", "Product · Systems · Security"],
-                ["Primary", "TypeScript · C++ · Python"],
-                ["Record", "175 repos · 435 ★ · Top 1% THM"],
-                ["Status", "Open to work"],
-              ].map(([k, v]) => (
-                <div
-                  key={k}
-                  className="flex items-baseline justify-between gap-4 border-b border-[var(--rule)] py-1.5 last:border-0"
-                >
-                  <dt className="label">{k}</dt>
-                  <dd className="meta text-right text-[var(--ink)]">{v}</dd>
-                </div>
-              ))}
-            </motion.dl>
+              <a
+                href="#work"
+                className="group inline-flex items-baseline gap-2 border border-[var(--ink)] px-3.5 py-2 transition-colors hover:bg-[var(--ink)] hover:text-[var(--paper)]"
+              >
+                <span className="meta text-inherit">Read the work</span>
+                <span className="num text-[9px] text-[var(--accent)] transition-transform duration-500 group-hover:translate-y-0.5">
+                  ↓
+                </span>
+              </a>
+              <a
+                href={`mailto:${profile.email}?subject=Project%20enquiry`}
+                className="meta link-u text-[var(--ink)] hover:text-[var(--accent)]"
+              >
+                Start a project
+              </a>
+              <span className="meta flex items-center gap-1.5 text-[var(--faint)]">
+                <span className="relative flex h-1.5 w-1.5 items-center justify-center">
+                  <span className="absolute h-1.5 w-1.5 rounded-full bg-[var(--sage)]" />
+                </span>
+                Open to work
+              </span>
+            </motion.div>
+          </div>
+
+          {/* ——— right: the cabinet of pins ——— */}
+          <div className="relative lg:col-span-5 lg:pl-2">
+            <BadgeWall startDelay={2.5} />
           </div>
         </div>
 
-        {/* footer of the cover */}
+        {/* cover footer */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2.7 }}
-          className="flex flex-wrap items-end justify-between gap-3 border-t border-[var(--rule)] pt-3"
+          transition={{ duration: 1, delay: 2.72 }}
+          className="flex flex-wrap items-end justify-between gap-3 border-t border-[var(--rule)] pt-2.5"
         >
-          <a
-            href="#work"
-            className="group flex items-baseline gap-2"
-            aria-label="Jump to the work chapter"
-          >
-            <span className="meta text-[var(--ink)] group-hover:text-[var(--accent)]">Read the work</span>
-            <span className="num text-[10px] text-[var(--accent)] transition-transform duration-500 group-hover:translate-y-0.5">
-              ↓
-            </span>
-          </a>
+          <p className="label">
+            Eleven pins · three issuers · every one checkable
+          </p>
           <div className="flex flex-wrap items-center gap-4">
             {[
               ["GitHub", profile.links.github],
