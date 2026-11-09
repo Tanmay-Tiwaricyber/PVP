@@ -5,10 +5,10 @@ import "@fontsource/instrument-serif/400.css";
 import "@fontsource/instrument-serif/400-italic.css";
 import "./globals.css";
 import SmoothScroll from "@/components/smooth-scroll";
-import Preloader from "@/components/preloader";
 import Grain from "@/components/grain";
 import MotionProvider from "@/components/motion-provider";
 import Doodle from "@/components/doodle";
+import Cursor from "@/components/machine/cursor";
 import Binding from "@/components/binding";
 
 export const metadata: Metadata = {
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f2efe7" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0b0c" },
+    { media: "(prefers-color-scheme: light)", color: "#05070a" },
+    { media: "(prefers-color-scheme: dark)", color: "#05070a" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -61,21 +61,21 @@ export const viewport: Viewport = {
  * Paper is the default — the volume is designed on paper first — and only an
  * explicit choice by the visitor switches it to Ink.
  */
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t='light';}var r=document.documentElement;r.dataset.theme=t;r.classList.toggle('dark',t==='dark');r.dataset.intro='done';}catch(e){}})();`;
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='dark'&&t!=='light'){t='dark';}var r=document.documentElement;r.dataset.theme=t;r.classList.toggle('dark',t==='dark');r.dataset.intro='done';r.classList.toggle('machine',t==='dark');}catch(e){}})();`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark machine" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
         <MotionProvider>
           <Doodle />
+          <Cursor />
           <Grain />
           <Binding />
           <SmoothScroll />
-          <Preloader />
           {children}
         </MotionProvider>
       </body>

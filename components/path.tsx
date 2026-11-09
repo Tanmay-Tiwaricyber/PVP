@@ -3,7 +3,7 @@
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { timeline, awards } from "@/lib/site";
-import ChapterHead from "./chapter-head";
+import LayerHead from "./machine/layer-head";
 import { RuledLine } from "./squiggle";
 
 export default function Path() {
@@ -15,13 +15,20 @@ export default function Path() {
   });
 
   return (
-    <section id="path" className="rule-t py-14 sm:py-20">
+    <section
+      id="path"
+      data-cam="-0.6,-5.3,4.6|-0.1,-5.4,-1.8"
+      data-layer="L2 · KERNEL"
+      data-depth="0310 m"
+      className="rule-t py-14 sm:py-20"
+    >
       <div className="shell">
-        <ChapterHead
-          no="05"
+        <LayerHead
+          layer="L2 · Kernel"
+          depth="310 m"
+          name="Systems & native"
           title="Six years, in public"
           accentWord="public"
-          aside="Oct 2021 → today"
           lede="No private achievements, no vague claims. The record is the commit history, the deploy logs and the rooms completed."
         />
 

@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { repos } from "@/lib/repos";
-import ChapterHead from "./chapter-head";
+import LayerHead from "./machine/layer-head";
 
 const FILTERS = ["All", "TypeScript", "JavaScript", "Python", "HTML", "C++"] as const;
 
@@ -20,13 +20,20 @@ export default function Archive() {
   }, [filter, q]);
 
   return (
-    <section id="archive" className="rule-t py-14 sm:py-20">
+    <section
+      id="archive"
+      data-cam="1.8,-2.5,6.4|0.4,-2.7,-1.6"
+      data-layer="SURFACE · INDEX"
+      data-depth="0004 m"
+      className="rule-t py-14 sm:py-20"
+    >
       <div className="shell">
-        <ChapterHead
-          no="06"
+        <LayerHead
+          layer="L1 · Browser"
+          depth="006 m"
+          name={`${repos.length} public repositories`}
           title="The archive"
           accentWord="archive"
-          aside={`${repos.length} public repositories`}
           lede="Every portfolio has a second inventory: the experiments, the tools nobody asked for, the repositories that taught the lesson and then went quiet."
         />
 

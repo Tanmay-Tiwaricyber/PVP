@@ -2,7 +2,8 @@
 
 import { motion } from "motion/react";
 import { thm } from "@/lib/site";
-import ChapterHead from "./chapter-head";
+import LayerHead from "./machine/layer-head";
+import NetworkPanel from "./machine/network-panel";
 import { Circle } from "./squiggle";
 
 /**
@@ -18,15 +19,24 @@ const metrics = [
 
 export default function Security() {
   return (
-    <section id="security" className="rule-t py-14 sm:py-20">
+    <section
+      id="security"
+      data-cam="0.2,-8.9,4.8|0,-8.9,-1.4"
+      data-layer="L3 · NETWORK"
+      data-depth="0640 m"
+      className="rule-t py-14 sm:py-20"
+    >
       <div className="shell">
-        <ChapterHead
-          no="04"
+        <LayerHead
+          layer="L3 · Network"
+          depth="640 m"
+          name={`TryHackMe · captured ${thm.captured}`}
           title="The security record"
-          accentWord="security"
-          aside={`TryHackMe · captured ${thm.captured}`}
+          accentWord="record"
           lede="Five years of offensive practice behind the code I ship — rooms, CTFs and my own tooling. It is the reason the products above fail safely instead of loudly."
         />
+
+        <NetworkPanel />
 
         <div className="grid gap-6 lg:grid-cols-12 lg:gap-10">
           {/* dossier */}
