@@ -158,6 +158,14 @@ export default function Hero() {
             >
               LinkedIn
             </a>
+            <a
+              className="link-u transition-colors hover:text-bone"
+              href="https://tryhackme.com/p/TanmayTiwari"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TryHackMe
+            </a>
             <a className="link-u transition-colors hover:text-bone" href="mailto:tanmaytiwaricyber@gmail.com">
               Email
             </a>
