@@ -6,6 +6,7 @@ import Work from "@/components/work";
 import CaseStudy from "@/components/case-study";
 import Craft from "@/components/craft";
 import Archive from "@/components/archive";
+import LiveProfile from "@/components/live-profile";
 import Path from "@/components/path";
 import Contact from "@/components/contact";
 import { profile } from "@/lib/site";
@@ -26,7 +27,12 @@ export default function Home() {
       addressRegion: "Uttar Pradesh",
       addressCountry: "IN",
     },
-    sameAs: [profile.links.github, profile.links.linkedin, profile.links.orcid],
+    sameAs: [
+      profile.links.github,
+      profile.links.linkedin,
+      profile.links.tryhackme,
+      profile.links.orcid,
+    ],
     knowsAbout: [
       "Next.js",
       "TypeScript",
@@ -35,6 +41,8 @@ export default function Home() {
       "Cybersecurity",
       "Developer tooling",
       "Applied AI",
+      "Penetration testing",
+      "CTF",
     ],
   };
 
@@ -52,6 +60,7 @@ export default function Home() {
         <Work />
         <CaseStudy />
         <Craft />
+        <LiveProfile />
         <Archive />
         <Path />
         <Contact />

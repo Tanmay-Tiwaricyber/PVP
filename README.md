@@ -46,9 +46,14 @@ Zero image assets, zero icon libraries, zero analytics.
 4. **Work** — editorial index with an accent-coloured preview instrument panel per project
    (Hyper Island, ContribMatch, C Visualize, SyncPlay, Judge-Ready, GARUDA Club).
 5. **Craft** — four capability accordions.
-6. **Archive** — live, filterable, searchable index of all 175 public repositories.
-7. **Path** — scroll-drawn six-year timeline + awards marquee.
-8. **Contact** — copy-to-clipboard email, social list, oversized wordmark.
+6. **Security** — TryHackMe profile ([p/TanmayTiwari](https://tryhackme.com/p/TanmayTiwari))
+   with an optional live score/rank proxy, plus the verified DEADFACE CTF 2024 credential
+   and the identity strip (GitHub · LinkedIn · TryHackMe · ORCID · email).
+7. **Archive** — filterable, searchable index of all 175 public repositories.
+8. **Path** — scroll-drawn six-year timeline + awards marquee.
+9. **Case study** — *Hyper Island, working*: a live, playable Dynamic Island reproduction
+   (hover to peek, four switchable pages, spring morph).
+10. **Contact** — copy-to-clipboard email, social list, oversized wordmark.
 
 ---
 
@@ -70,6 +75,13 @@ STATIC_EXPORT=1 NEXT_PUBLIC_BASE_PATH=/PVP npm run build   # → out/
 `.github/workflows/deploy-pages.yml` does exactly this on every push to `main` and
 publishes `out/` to GitHub Pages. Enable **Settings → Pages → Source: GitHub Actions**
 once and the site is live at `https://tanmay-tiwaricyber.github.io/PVP/`.
+
+### TryHackMe live score (optional)
+
+`app/api/tryhackme/route.ts` proxies the public THM profile endpoint and caches it for an
+hour. Set `THM_USERNAME` if the handle ever changes. If the upstream API is unreachable
+(or on a static export, where there is no server) the card degrades gracefully to a
+"Live ↗" link instead of showing a stale number.
 
 ### Vercel / Netlify
 

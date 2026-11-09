@@ -17,6 +17,7 @@ export const profile = {
     github: "https://github.com/Tanmay-Tiwaricyber",
     linkedin: "https://www.linkedin.com/in/tanmay-tiwari-a4a551235",
     orcid: "https://orcid.org/0009-0004-8455-0989",
+    tryhackme: "https://tryhackme.com/p/TanmayTiwari",
     site: "https://tanmay-tiwaricyber.github.io/",
     remoteCoders: "https://r3mote-cod3rs.netlify.app/",
     oldPortfolio: "https://txt4nm4y.vercel.app/",
@@ -236,7 +237,7 @@ export const timeline = [
 
 export const awards = [
   "DEADFACE CTF 2024 · Competitor",
-  "TryHackMe · active rank",
+  "TryHackMe · p/TanmayTiwari",
   "Holopin · verified badge profile",
   "ORCID · 0009-0004-8455-0989",
   "GitHub · Pull Shark ×2",
@@ -245,9 +246,39 @@ export const awards = [
   "GitHub Developer Program",
 ];
 
+/* ---------- TryHackMe ---------- */
+
+export const tryhackme = {
+  handle: "TanmayTiwari",
+  href: profile.links.tryhackme,
+  badge: "https://tryhackme-badges.s3.amazonaws.com/TanmayTiwari.png",
+  /** Verified on the profile README: DEADFACE CTF 2024, competitor badge. */
+  ctfs: [
+    {
+      name: "DEADFACE CTF",
+      edition: "2024",
+      role: "Competitor",
+      team: "Cyb3r.t1nm1y",
+      issuer: "Cyber Hacktics",
+      credential:
+        "https://api.badgr.io/public/assertions/dl6ok0qiTRuMH-vLdOXKog?identity__email=tanmaytiwaricyber@gmail.com",
+    },
+  ],
+  domains: [
+    { name: "Web exploitation", note: "the layer I build in every day" },
+    { name: "OSINT & recon", note: "where most engagements actually start" },
+    { name: "Linux privilege escalation", note: "rooms, then my own boxes" },
+    { name: "Forensics & stego", note: "CTF discipline under a clock" },
+  ],
+  /** Deliberately unpopulated until the live rank is confirmed. */
+  score: null as number | null,
+  rank: null as string | null,
+};
+
 export const socials = [
   { label: "GitHub", handle: "@Tanmay-Tiwaricyber", href: profile.links.github },
   { label: "LinkedIn", handle: "in/tanmay-tiwari", href: profile.links.linkedin },
+  { label: "TryHackMe", handle: "p/TanmayTiwari", href: profile.links.tryhackme },
   { label: "ORCID", handle: "0009-0004-8455-0989", href: profile.links.orcid },
   { label: "Email", handle: profile.email, href: `mailto:${profile.email}` },
 ];
