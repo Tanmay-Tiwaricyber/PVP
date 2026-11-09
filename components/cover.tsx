@@ -5,6 +5,7 @@ import { useRef } from "react";
 import LocalClock from "./local-clock";
 import BadgeWall from "./badge-wall";
 import ThmSeal from "./thm-seal";
+import useIntro from "./use-intro";
 import { profile } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -12,6 +13,7 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export default function Cover() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  const t = useIntro(1.95);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "9%"]);
   const fade = useTransform(scrollYProgress, [0, 0.92], [1, 0]);
@@ -38,7 +40,7 @@ export default function Cover() {
               <motion.p
                 initial={{ y: "108%" }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1.1, delay: 1.95, ease: EASE }}
+                transition={{ duration: 1.1, delay: t + 1.95, ease: EASE }}
                 className="label text-[var(--ink)]"
               >
                 {profile.name} <span className="mx-1.5 text-[var(--accent)]">·</span>{" "}
@@ -50,7 +52,7 @@ export default function Cover() {
               <motion.h1
                 initial={{ y: "104%" }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1.4, delay: 2.02, ease: EASE }}
+                transition={{ duration: 1.4, delay: t + 2.02, ease: EASE }}
                 className="display text-[clamp(3.3rem,11.5vw,9.5rem)]"
               >
                 Tanmay
@@ -60,7 +62,7 @@ export default function Cover() {
               <motion.p
                 initial={{ y: "104%" }}
                 animate={{ y: 0 }}
-                transition={{ duration: 1.4, delay: 2.1, ease: EASE }}
+                transition={{ duration: 1.4, delay: t + 2.1, ease: EASE }}
                 className="display flex flex-wrap items-baseline gap-x-[0.16em] text-[clamp(3.3rem,11.5vw,9.5rem)]"
               >
                 <span>Tiwari</span>
@@ -77,14 +79,14 @@ export default function Cover() {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 1.2, delay: 2.32, ease: EASE }}
+              transition={{ duration: 1.2, delay: t + 2.32, ease: EASE }}
               className="mt-4 h-px origin-left bg-[var(--rule-strong)]"
             />
 
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 2.44, ease: EASE }}
+              transition={{ duration: 0.9, delay: t + 2.44, ease: EASE }}
               className="mt-4 max-w-[46ch]"
             >
               <p className="dropcap text-[clamp(0.92rem,1.35vw,1.06rem)] leading-[1.6] text-[var(--ink)]/85">
@@ -97,7 +99,7 @@ export default function Cover() {
             <motion.div
               initial={{ opacity: 0, scale: 0.94, rotate: 0 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, delay: 2.5, ease: EASE }}
+              transition={{ duration: 0.9, delay: t + 2.5, ease: EASE }}
               className="pointer-events-none absolute bottom-2 right-2 hidden -rotate-[9deg] xl:block"
             >
               <ThmSeal size={96} />
@@ -106,7 +108,7 @@ export default function Cover() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.9, delay: 2.56 }}
+              transition={{ duration: 0.9, delay: t + 2.56 }}
               className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3"
             >
               <a
@@ -135,7 +137,7 @@ export default function Cover() {
 
           {/* ——— right: the cabinet of pins ——— */}
           <div className="relative lg:col-span-5 lg:pl-2">
-            <BadgeWall startDelay={2.5} />
+            <BadgeWall startDelay={t + 2.5} />
           </div>
         </div>
 
@@ -143,7 +145,7 @@ export default function Cover() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 2.72 }}
+          transition={{ duration: 1, delay: t + 2.72 }}
           className="flex flex-wrap items-end justify-between gap-3 border-t border-[var(--rule)] pt-2.5"
         >
           <p className="label">
