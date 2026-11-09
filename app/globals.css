@@ -249,6 +249,18 @@ body {
 
 /* ---------- Marquee ---------- */
 
+@keyframes seal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.seal-spin {
+  animation: seal-spin 64s linear infinite;
+}
+.seal-spin textPath {
+  text-transform: uppercase;
+}
+
 @keyframes marquee-x {
   from {
     transform: translate3d(0, 0, 0);
@@ -320,7 +332,9 @@ body {
 .theme-switch button {
   position: relative;
   z-index: 1;
-  padding: 0.28rem 0.5rem;
+  width: 3.45rem;
+  padding: 0.3rem 0.2rem;
+  text-align: center;
   font-family: var(--font-mono);
   font-size: 0.54rem;
   letter-spacing: 0.18em;
