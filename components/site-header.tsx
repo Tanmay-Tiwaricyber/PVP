@@ -5,12 +5,14 @@ import { useEffect, useState } from "react";
 import ThemeToggle from "./theme-toggle";
 import LocalClock from "./local-clock";
 import { chapters, profile } from "@/lib/site";
+import useIntro from "./use-intro";
 
 export default function SiteHeader() {
   const { scrollY, scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
   const [dense, setDense] = useState(false);
   const [open, setOpen] = useState(false);
+  const intro = useIntro(1.6);
 
   useMotionValueEvent(scrollY, "change", (v) => setDense(v > 64));
 
@@ -26,7 +28,7 @@ export default function SiteHeader() {
       <motion.header
         initial={{ y: -28, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.9, delay: intro + 0.28, ease: [0.16, 1, 0.3, 1] }}
         className="fixed inset-x-0 top-0 z-50 backdrop-blur-[2px]"
         style={{ backgroundColor: "color-mix(in srgb, var(--paper) 82%, transparent)" }}
       >

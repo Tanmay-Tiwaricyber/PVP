@@ -23,6 +23,7 @@ export default function Preloader() {
       seen = false;
     }
     if (reduce || seen || window.location.hash) return;
+    document.documentElement.dataset.intro = "pending";
     setDone(false);
   }, []);
 
@@ -42,6 +43,8 @@ function Sheet({ onDone }: { onDone: () => void }) {
         window.clearInterval(id);
         window.setTimeout(() => {
           document.documentElement.style.overflow = "";
+          document.documentElement.dataset.intro = "done";
+          window.dispatchEvent(new Event("tt:intro"));
           onDone();
         }, 260);
       }
