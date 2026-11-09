@@ -66,7 +66,7 @@ export default function Craft() {
                     >
                       <span
                         className={`font-mono text-[10px] tracking-widest transition-colors ${
-                          isOpen ? "text-signal" : "text-bone/25"
+                          isOpen ? "text-signal" : "text-bone/40"
                         }`}
                       >
                         {c.no}

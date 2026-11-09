@@ -81,17 +81,17 @@ export default function Work() {
                       </div>
                       <p
                         className={`mt-1.5 pl-1 text-[0.82rem] leading-relaxed transition-colors duration-300 ${
-                          isActive ? "text-bone/60" : "text-bone/30"
+                          isActive ? "text-bone/60" : "text-bone/45"
                         }`}
                       >
                         {p.tagline}
                       </p>
                     </div>
                     <div className="hidden shrink-0 text-right xl:block">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/35">
+                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45">
                         {p.year}
                       </p>
-                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/25">
+                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/40">
                         {p.metric}
                       </p>
                     </div>
@@ -185,7 +185,7 @@ export default function Work() {
                     <span className="font-mono text-[9px]" style={{ color: p.accent }}>
                       {p.index}
                     </span>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/30">
+                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45">
                       {p.year}
                     </span>
                   </div>

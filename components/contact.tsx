@@ -116,7 +116,7 @@ export default function Contact() {
                       </span>
                       <span className="flex items-center gap-2 text-[0.86rem] text-bone/80">
                         <span className="link-u truncate">{s.handle}</span>
-                        <span className="text-bone/30 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-acid">
+                        <span className="text-bone/45 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-acid">
                           ↗
                         </span>
                       </span>
@@ -124,7 +124,7 @@ export default function Contact() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 font-mono text-[9px] uppercase leading-[2] tracking-[0.16em] text-bone/25">
+              <p className="mt-5 font-mono text-[9px] uppercase leading-[2] tracking-[0.16em] text-bone/40">
                 {profile.location}
                 <br />
                 Open to remote · worldwide
@@ -135,10 +135,10 @@ export default function Contact() {
 
         {/* footer bottom */}
         <div className="mt-14 flex flex-col gap-4 border-t border-bone/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/30">
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45">
             © 2026 Tanmay Tiwari · Built with Next.js, Motion &amp; care
           </p>
-          <div className="flex items-center gap-5 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/30">
+          <div className="flex items-center gap-5 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45">
             <a href="#top" className="link-u hover:text-bone">
               Back to top ↑
             </a>

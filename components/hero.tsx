@@ -62,7 +62,7 @@ export default function Hero() {
               Available for freelance &amp; full-time · 2026
             </p>
           </div>
-          <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/35 sm:text-[10px]">
+          <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/45 sm:text-[10px]">
             Kanpur, IN · <LocalClock />
           </p>
         </motion.div>
@@ -148,7 +148,7 @@ export default function Hero() {
             </span>
             Scroll to explore
           </a>
-          <div className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/35 sm:gap-5 sm:text-[10px]">
+          <div className="flex items-center gap-4 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45 sm:gap-5 sm:text-[10px]">
             <a className="link-u transition-colors hover:text-bone" href="https://github.com/Tanmay-Tiwaricyber">
               GitHub
             </a>

@@ -68,7 +68,7 @@ export default function Path() {
                   {t.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/30"
+                      className="font-mono text-[9px] uppercase tracking-[0.16em] text-bone/45"
                     >
                       [{tag}]
                     </span>

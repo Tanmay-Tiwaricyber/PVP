@@ -103,7 +103,7 @@ export default function ProjectVisual({ project }: { project: Project }) {
                 ["5", "}", 0.3],
               ].map(([n, code, op], i) => (
                 <div key={i} className="flex items-center gap-2">
-                  <span className="font-mono text-[6px] text-bone/25">{n}</span>
+                  <span className="font-mono text-[6px] text-bone/40">{n}</span>
                   <span
                     className="font-mono text-[7px]"
                     style={{

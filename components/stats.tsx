@@ -77,7 +77,7 @@ export default function Stats() {
                   <p className="mt-3 font-mono text-[10px] uppercase leading-relaxed tracking-[0.16em] text-bone/50">
                     {s.label}
                   </p>
-                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/25">
+                  <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.16em] text-bone/40">
                     {s.note}
                   </p>
                   <span className="absolute bottom-0 left-0 h-px w-0 bg-signal transition-all duration-700 group-hover:w-full" />

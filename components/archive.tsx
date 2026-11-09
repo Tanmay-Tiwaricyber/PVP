@@ -59,13 +59,13 @@ export default function Archive() {
               ))}
             </div>
             <label className="relative flex items-center gap-2 border-b border-bone/15 pb-1 sm:w-56">
-              <span className="font-mono text-[10px] text-bone/30">⌕</span>
+              <span className="font-mono text-[10px] text-bone/45">⌕</span>
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="search repositories"
                 aria-label="Search repositories"
-                className="w-full bg-transparent font-mono text-[10px] uppercase tracking-[0.14em] text-bone placeholder:text-bone/25 focus:outline-none"
+                className="w-full bg-transparent font-mono text-[10px] uppercase tracking-[0.14em] text-bone placeholder:text-bone/40 focus:outline-none"
               />
             </label>
           </div>
@@ -84,7 +84,7 @@ export default function Archive() {
               transition={{ duration: 0.5, delay: Math.min(i, 9) * 0.03, ease: [0.16, 1, 0.3, 1] }}
               className="group flex items-start gap-3 border-b border-bone/10 py-3.5"
             >
-              <span className="mt-1 font-mono text-[9px] text-bone/20">
+              <span className="mt-1 font-mono text-[9px] text-bone/45">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <span className="min-w-0 flex-1">
@@ -97,11 +97,11 @@ export default function Archive() {
                   )}
                 </span>
                 {r.desc ? (
-                  <span className="mt-0.5 block truncate text-[0.72rem] leading-relaxed text-bone/32">
+                  <span className="mt-0.5 block truncate text-[0.72rem] leading-relaxed text-bone/45">
                     {r.desc}
                   </span>
                 ) : null}
-                <span className="mt-1 flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-bone/25">
+                <span className="mt-1 flex items-center gap-2 font-mono text-[8px] uppercase tracking-[0.14em] text-bone/40">
                   <span
                     className="h-1 w-1 rounded-full"
                     style={{
@@ -125,12 +125,12 @@ export default function Archive() {
           ))}
         </div>
         {list.length === 0 && (
-          <p className="py-10 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/30">
+          <p className="py-10 font-mono text-[11px] uppercase tracking-[0.18em] text-bone/45">
             Nothing here under that name — try another.
           </p>
         )}
         <div className="mt-8 flex items-center justify-between border-t border-bone/10 pt-4">
-          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/25">
+          <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/40">
             Showing {list.length} of {repos.length}
           </p>
           <a
