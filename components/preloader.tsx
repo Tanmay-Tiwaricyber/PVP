@@ -3,12 +3,12 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
-const WORDS = ["hello", "namaste", "01101000 01101001"];
-
+/**
+ * A cover being pulled back. Prints the folio number, then lifts.
+ */
 export default function Preloader() {
   const [done, setDone] = useState(false);
-  const [count, setCount] = useState(0);
-  const [word, setWord] = useState(0);
+  const [n, setN] = useState(0);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -17,23 +17,20 @@ export default function Preloader() {
       return;
     }
     document.documentElement.style.overflow = "hidden";
-
-    let value = 0;
-    const tick = window.setInterval(() => {
-      value = Math.min(100, value + Math.random() * 9 + 3);
-      setCount(Math.floor(value));
-      setWord((w) => (value > 66 ? 2 : value > 33 ? 1 : w > 1 ? 2 : w));
-      if (value >= 100) {
-        window.clearInterval(tick);
+    let v = 0;
+    const id = window.setInterval(() => {
+      v = Math.min(100, v + Math.random() * 11 + 4);
+      setN(Math.floor(v));
+      if (v >= 100) {
+        window.clearInterval(id);
         window.setTimeout(() => {
           setDone(true);
           document.documentElement.style.overflow = "";
-        }, 380);
+        }, 320);
       }
-    }, 90);
-
+    }, 85);
     return () => {
-      window.clearInterval(tick);
+      window.clearInterval(id);
       document.documentElement.style.overflow = "";
     };
   }, []);
@@ -42,40 +39,29 @@ export default function Preloader() {
     <AnimatePresence>
       {!done && (
         <motion.div
-          className="fixed inset-0 z-[100] flex flex-col justify-between bg-ink px-[var(--gutter)] py-6"
-          exit={{ y: "-101%" }}
-          transition={{ duration: 1.05, ease: [0.76, 0, 0.24, 1] }}
+          className="fixed inset-0 z-[100] flex flex-col justify-between bg-[var(--paper)] px-[var(--gutter)] py-5"
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.95, ease: [0.76, 0, 0.24, 1] }}
         >
-          <div className="flex items-start justify-between">
-            <span className="label">Tanmay Tiwari</span>
-            <span className="label">Kanpur, IN</span>
+          <div className="flex items-start justify-between border-b border-[var(--rule)] pb-2">
+            <span className="label text-[var(--ink)]">Tanmay Tiwari</span>
+            <span className="label">Volume 01</span>
           </div>
 
           <div className="flex items-end justify-between gap-6">
-            <div className="overflow-hidden">
-              <motion.p
-                key={word}
-                initial={{ y: "110%" }}
-                animate={{ y: 0 }}
-                exit={{ y: "-110%" }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="serif-accent text-[clamp(2.6rem,9vw,7rem)] leading-none text-bone"
-              >
-                {WORDS[word]}
-              </motion.p>
-            </div>
-            <div className="text-right">
-              <span className="font-mono text-[clamp(2rem,6vw,4.5rem)] leading-none tabular-nums text-bone">
-                {String(count).padStart(3, "0")}
-              </span>
-              <span className="label ml-1">%</span>
-            </div>
+            <p className="serif text-[clamp(2.4rem,8vw,6rem)] leading-none">
+              Silent
+              <span className="serif-italic text-[var(--accent)]"> Programmer</span>
+            </p>
+            <span className="num text-[clamp(1.6rem,5vw,3.4rem)] leading-none text-[var(--muted)]">
+              {String(n).padStart(3, "0")}
+            </span>
           </div>
 
-          <div className="relative h-px w-full bg-bone/15">
+          <div className="relative h-px w-full bg-[var(--rule)]">
             <motion.div
-              className="absolute inset-y-0 left-0 bg-signal"
-              animate={{ width: `${count}%` }}
+              className="absolute inset-y-0 left-0 bg-[var(--accent)]"
+              animate={{ width: `${n}%` }}
               transition={{ ease: "linear", duration: 0.1 }}
             />
           </div>

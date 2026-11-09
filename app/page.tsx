@@ -1,15 +1,13 @@
-import Nav from "@/components/nav";
-import Hero from "@/components/hero";
-import Marquee from "@/components/marquee";
-import Stats from "@/components/stats";
+import SiteHeader from "@/components/site-header";
+import Cover from "@/components/cover";
 import Work from "@/components/work";
-import CaseStudy from "@/components/case-study";
 import Craft from "@/components/craft";
-import Archive from "@/components/archive";
-import LiveProfile from "@/components/live-profile";
+import Security from "@/components/security";
 import Path from "@/components/path";
-import Contact from "@/components/contact";
-import { profile } from "@/lib/site";
+import Archive from "@/components/archive";
+import Colophon from "@/components/colophon";
+import Ledger from "@/components/ledger";
+import { profile, stats, thm } from "@/lib/site";
 
 export default function Home() {
   const schema = {
@@ -19,7 +17,6 @@ export default function Home() {
     alternateName: profile.alias,
     email: `mailto:${profile.email}`,
     jobTitle: profile.role,
-    description: profile.statement,
     url: "/",
     address: {
       "@type": "PostalAddress",
@@ -39,11 +36,15 @@ export default function Home() {
       "React",
       "C++",
       "Cybersecurity",
-      "Developer tooling",
-      "Applied AI",
       "Penetration testing",
-      "CTF",
+      "Developer tooling",
     ],
+    subjectOf: {
+      "@type": "ProfilePage",
+      name: `TryHackMe — ${thm.handle}`,
+      url: thm.href,
+      description: `${thm.league} league, ${thm.ranking} global ranking, capability score ${thm.capability}.`,
+    },
   };
 
   return (
@@ -52,18 +53,22 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <Nav />
-      <main>
-        <Hero />
-        <Marquee />
-        <Stats />
+      <a
+        href="#work"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:border focus:border-[var(--ink)] focus:bg-[var(--paper)] focus:px-3 focus:py-2 focus:text-[var(--ink)]"
+      >
+        Skip to content
+      </a>
+      <SiteHeader />
+      <main id="main">
+        <Cover />
+        <Ledger stats={stats} />
         <Work />
-        <CaseStudy />
         <Craft />
-        <LiveProfile />
-        <Archive />
+        <Security />
         <Path />
-        <Contact />
+        <Archive />
+        <Colophon />
       </main>
     </>
   );

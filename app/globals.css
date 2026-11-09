@@ -1,28 +1,77 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   A paper-and-ink design system.
+   Light ("Paper") is the default; dark ("Ink") is a genuine second palette,
+   not an inversion. Everything references semantic tokens so both themes are
+   first-class citizens.
+   ========================================================================== */
+
 @theme {
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
-  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
 
-  --color-ink: #07070a;
-  --color-ink-2: #0c0c11;
-  --color-void: #040406;
-  --color-bone: #f2efe6;
-  --color-ash: #9c9a92;
-  --color-ash-dim: #8a8880;
-  --color-signal: #ff4d1f;
-  --color-signal-soft: #ff7a4d;
-  --color-acid: #d9f24b;
-  --color-cyan: #6fe3ff;
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-ochre: var(--ochre);
+  --color-sage: var(--sage);
+  --color-invert: var(--invert);
+  --color-invert-ink: var(--invert-ink);
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  --grid-line: rgba(242, 239, 230, 0.055);
-  --edge: rgba(242, 239, 230, 0.1);
-  --gutter: clamp(1.15rem, 4vw, 5rem);
+  /* Paper */
+  --paper: #f2efe7;
+  --paper-2: #e9e5da;
+  --ink: #14130f;
+  --muted: #66645c;
+  --faint: #6f6b61;
+  --rule: rgba(20, 19, 15, 0.13);
+  --rule-strong: rgba(20, 19, 15, 0.28);
+  --accent: #c53c26;
+  --accent-2: #25409b;
+  --ochre: #a8821c;
+  --sage: #4f6350;
+  --invert: #14130f;
+  --invert-ink: #f2efe7;
+
+  --gutter: clamp(1.15rem, 4.2vw, 4.5rem);
+  --mark: rgba(20, 19, 15, 0.35);
+  --noise: 0.022;
+  color-scheme: light;
+}
+
+.dark {
+  /* Ink */
+  --paper: #0b0b0c;
+  --paper-2: #111113;
+  --ink: #f2efe7;
+  --muted: #9b978d;
+  --faint: #8a8780;
+  --rule: rgba(242, 239, 231, 0.14);
+  --rule-strong: rgba(242, 239, 231, 0.3);
+  --accent: #ff6041;
+  --accent-2: #8fa4ff;
+  --ochre: #e0b84b;
+  --sage: #93ab8f;
+  --invert: #f2efe7;
+  --invert-ink: #0b0b0c;
+
+  --mark: rgba(242, 239, 231, 0.35);
+  --noise: 0.03;
+  color-scheme: dark;
 }
 
 * {
@@ -31,8 +80,8 @@
 }
 
 html {
-  background: var(--color-ink);
-  scroll-behavior: auto;
+  background: var(--paper);
+  -webkit-text-size-adjust: 100%;
 }
 
 html.lenis,
@@ -48,49 +97,87 @@ html.lenis body {
 
 body {
   margin: 0;
-  background: var(--color-ink);
-  color: var(--color-bone);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans);
   font-synthesis-weight: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: clip;
   text-rendering: optimizeLegibility;
+  transition: background-color 0.45s var(--ease-out-expo), color 0.45s var(--ease-out-expo);
 }
 
 ::selection {
-  background: var(--color-signal);
-  color: #0a0a0a;
+  background: var(--accent);
+  color: var(--paper);
 }
 
-/* ---------- Typography primitives ---------- */
+/* ---------- Type ---------- */
 
-.display {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  line-height: 0.86;
-  letter-spacing: -0.045em;
-  text-wrap: balance;
-}
-
-.serif-accent {
-  font-family: var(--font-serif);
-  font-style: italic;
+.serif {
+  font-family: var(--font-display);
   font-weight: 400;
   letter-spacing: -0.02em;
 }
 
+.serif-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.grotesk {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+
 .label {
   font-family: var(--font-mono);
-  font-size: clamp(0.6rem, 0.72vw, 0.72rem);
-  letter-spacing: 0.18em;
+  font-size: clamp(0.56rem, 0.66vw, 0.66rem);
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--color-ash-dim);
+  color: var(--faint);
   font-weight: 500;
 }
 
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
 .measure {
-  max-width: 62ch;
+  max-width: 60ch;
+}
+
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  float: left;
+  font-size: 4.1em;
+  line-height: 0.78;
+  padding-right: 0.09em;
+  padding-top: 0.06em;
+  color: var(--accent);
 }
 
 /* ---------- Layout ---------- */
@@ -99,24 +186,65 @@ body {
   width: 100%;
   margin-inline: auto;
   padding-inline: var(--gutter);
-  max-width: 1560px;
+  max-width: 1600px;
 }
 
 .rule {
   height: 1px;
   width: 100%;
-  background: var(--edge);
+  background: var(--rule);
+}
+.rule-t {
+  border-top: 1px solid var(--rule);
+}
+.rule-b {
+  border-bottom: 1px solid var(--rule);
 }
 
-/* ---------- Reveal utility (GSAP-free, CSS-driven) ---------- */
-
-.line-mask {
-  display: block;
-  overflow: hidden;
+/* Crop / registration marks — the print tell */
+.crop {
+  position: relative;
 }
-.line-mask > * {
-  display: block;
-  will-change: transform;
+.crop::before,
+.crop::after {
+  content: "";
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-color: var(--mark);
+  border-style: solid;
+  opacity: 0.7;
+  pointer-events: none;
+}
+.crop::before {
+  top: -1px;
+  left: -1px;
+  border-width: 1px 0 0 1px;
+}
+.crop::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
+}
+
+.halftone {
+  background-image: radial-gradient(var(--rule-strong) 0.6px, transparent 0.7px);
+  background-size: 5px 5px;
+}
+
+/* ---------- Paper grain ---------- */
+
+.grain {
+  position: fixed;
+  inset: -40%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: var(--noise);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+.dark .grain {
+  mix-blend-mode: screen;
 }
 
 /* ---------- Marquee ---------- */
@@ -132,76 +260,13 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee-x var(--dur, 40s) linear infinite;
-}
-.marquee-track.rev {
-  animation-direction: reverse;
+  animation: marquee-x var(--dur, 44s) linear infinite;
 }
 .marquee-host:hover .marquee-track {
   animation-play-state: paused;
 }
 
-/* ---------- Cursor ---------- */
-
-.cursor-dot,
-.cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  border-radius: 999px;
-  mix-blend-mode: difference;
-}
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: #fff;
-  margin: -3px 0 0 -3px;
-}
-.cursor-ring {
-  width: 42px;
-  height: 42px;
-  margin: -21px 0 0 -21px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  transition: width 0.35s var(--ease-out-expo), height 0.35s var(--ease-out-expo),
-    margin 0.35s var(--ease-out-expo), border-color 0.3s ease, opacity 0.3s ease;
-}
-.cursor-ring[data-mode="hover"] {
-  width: 78px;
-  height: 78px;
-  margin: -39px 0 0 -39px;
-  border-color: rgba(255, 255, 255, 0.85);
-}
-@media (hover: none), (pointer: coarse) {
-  .cursor-dot,
-  .cursor-ring {
-    display: none;
-  }
-}
-
-/* ---------- Noise / grain ---------- */
-
-.grain {
-  position: fixed;
-  inset: -50%;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.031;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  will-change: transform;
-  animation: grain-shift 6s steps(6) infinite;
-}
-@keyframes grain-shift {
-  0% { transform: translate(0, 0); }
-  20% { transform: translate(-3%, 2%); }
-  40% { transform: translate(2%, -3%); }
-  60% { transform: translate(-2%, -2%); }
-  80% { transform: translate(3%, 1%); }
-  100% { transform: translate(0, 0); }
-}
-
-/* ---------- Link underline ---------- */
+/* ---------- Links ---------- */
 
 .link-u {
   position: relative;
@@ -219,33 +284,59 @@ body {
   transform-origin: right;
   transition: transform 0.55s var(--ease-out-expo);
 }
-.link-u:hover::after {
+.link-u:hover::after,
+.link-u:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-/* ---------- Focus ---------- */
-
 :focus-visible {
-  outline: 2px solid var(--color-acid);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 1px;
 }
-
-/* ---------- Scrollbar ---------- */
 
 ::-webkit-scrollbar {
-  width: 9px;
+  width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a0a0d;
+  background: var(--paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: #26262c;
-  border-radius: 99px;
+  background: var(--rule-strong);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #3a3a42;
+
+/* ---------- Selection strip (theme toggle is a physical switch) ---------- */
+
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--rule-strong);
+  padding: 2px;
+}
+.theme-switch button {
+  position: relative;
+  z-index: 1;
+  padding: 0.28rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--faint);
+  transition: color 0.3s ease;
+}
+.theme-switch button[data-active="true"] {
+  color: var(--paper);
+}
+.theme-switch .thumb {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  background: var(--ink);
+  transition: transform 0.42s var(--ease-out-expo), width 0.42s var(--ease-out-expo);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -256,5 +347,7 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  .grain { animation: none; }
+  .grain {
+    animation: none;
+  }
 }

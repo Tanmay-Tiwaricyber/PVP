@@ -16,81 +16,53 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(125deg, #08080c 0%, #0a0910 48%, #1d0d07 100%)",
-          padding: "64px 72px",
-          position: "relative",
+          background: "#f2efe7",
+          padding: "56px 64px",
+          color: "#14130f",
         }}
       >
+        {/* masthead */}
         <div
           style={{
-            position: "absolute",
-            right: -120,
-            top: -120,
-            width: 620,
-            height: 620,
-            borderRadius: 999,
-            background: "linear-gradient(160deg, rgba(255,77,31,0.55), rgba(255,77,31,0))",
             display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            borderBottom: "1px solid rgba(20,19,15,0.28)",
+            paddingBottom: 14,
           }}
-        />
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-            <div
-              style={{
-                width: 44,
-                height: 44,
-                borderRadius: 999,
-                border: "1px solid rgba(242,239,230,0.3)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#f2efe6",
-                fontSize: 18,
-                letterSpacing: -1,
-              }}
-            >
-              TT
-            </div>
-            <div
-              style={{
-                color: "rgba(242,239,230,0.6)",
-                fontSize: 18,
-                letterSpacing: 4,
-                textTransform: "uppercase",
-              }}
-            >
-              Silent Programmer
-            </div>
+        >
+          <div style={{ fontSize: 15, letterSpacing: 4, textTransform: "uppercase", opacity: 0.7 }}>
+            Portfolio · Vol. 01
           </div>
-          <div style={{ color: "rgba(242,239,230,0.4)", fontSize: 16, letterSpacing: 4 }}>
-            KANPUR · IN · 2026
+          <div style={{ fontSize: 15, letterSpacing: 4, textTransform: "uppercase", opacity: 0.7 }}>
+            Kanpur, IN · 2026
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <div
-            style={{
-              color: "#f2efe6",
-              fontSize: 158,
-              lineHeight: 0.86,
-              letterSpacing: -8,
-              fontWeight: 700,
-              display: "flex",
-            }}
-          >
-            TANMAY
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <div style={{ fontSize: 178, lineHeight: 0.82, letterSpacing: -7, display: "flex" }}>
+            Tanmay
           </div>
           <div
             style={{
-              color: "#f2efe6",
-              fontSize: 158,
-              lineHeight: 0.86,
-              letterSpacing: -8,
-              fontWeight: 700,
+              fontSize: 178,
+              lineHeight: 0.82,
+              letterSpacing: -7,
               display: "flex",
+              alignItems: "baseline",
+              gap: 18,
             }}
           >
-            TIWARI
+            <span>Tiwari</span>
+            <span style={{
+                fontSize: 32,
+                letterSpacing: 0,
+                color: "#c53c26",
+                fontStyle: "italic",
+                fontFamily: "Georgia, serif",
+              }}>
+              silent programmer
+            </span>
           </div>
         </div>
 
@@ -99,16 +71,20 @@ export default async function Image() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-end",
-            borderTop: "1px solid rgba(242,239,230,0.16)",
-            paddingTop: 24,
+            borderTop: "1px solid rgba(20,19,15,0.28)",
+            paddingTop: 16,
           }}
         >
-          <div style={{ color: "rgba(242,239,230,0.55)", fontSize: 25, display: "flex" }}>
-            Full-stack engineer · Cybersecurity builder
+          <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+            <div style={{ fontSize: 19, opacity: 0.75 }}>Full-stack engineer · Security builder</div>
+            <div style={{ fontSize: 13, letterSpacing: 3, textTransform: "uppercase", opacity: 0.5 }}>
+              175 repositories · TryHackMe Legend · Top 1%
+            </div>
           </div>
-          <div style={{ display: "flex", gap: 28, fontSize: 20, color: "#d9f24b" }}>
-            <span>175 repos</span>
-            <span>435 stars</span>
+          <div style={{ display: "flex", gap: 6 }}>
+            {["#14130f", "#c53c26", "#a8821c", "#4f6350"].map((c) => (
+              <div key={c} style={{ width: 26, height: 26, background: c, display: "flex" }} />
+            ))}
           </div>
         </div>
       </div>
