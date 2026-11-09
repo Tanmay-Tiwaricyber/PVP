@@ -33,6 +33,21 @@ export default function Cover() {
           </p>
         </div>
 
+        {/* vertical folio, set along the right margin the way a spine would be */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 lg:block"
+        >
+          <div className="flex items-center gap-3 [writing-mode:vertical-rl]">
+            <span className="h-16 w-px bg-[var(--rule)]" />
+            <span className="label text-[var(--faint)]">
+              Silent Programmer — Portfolio, Volume One
+            </span>
+            <span className="h-16 w-px bg-[var(--rule)]" />
+          </div>
+        </div>
+        <span aria-hidden className="crop absolute inset-x-0 top-24 hidden h-6 lg:block" />
+
         {/* the name */}
         <div className="py-6 sm:py-10">
           <div aria-hidden className="overflow-hidden">
