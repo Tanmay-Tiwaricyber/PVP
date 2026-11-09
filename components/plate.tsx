@@ -12,7 +12,7 @@ export default function Plate({ figure, className }: { figure: Project["figure"]
 
   return (
     <div
-      className={`relative aspect-[4/3] w-full overflow-hidden border border-[var(--rule)] bg-[var(--paper-2)] ${className ?? ""}`}
+      className={`plate-frame relative aspect-[4/3] w-full overflow-hidden border border-[var(--rule)] bg-[var(--paper-2)] ${className ?? ""}`}
     >
       <div className="halftone absolute inset-0 opacity-30" aria-hidden />
       <svg

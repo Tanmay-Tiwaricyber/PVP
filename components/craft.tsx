@@ -36,9 +36,9 @@ export default function Craft() {
                 <h3 className="grotesk mt-5 text-[clamp(1.15rem,1.9vw,1.5rem)]">{c.title}</h3>
                 <p className="mt-2.5 text-[0.82rem] leading-[1.6] text-[var(--muted)]">{c.body}</p>
               </div>
-              <div className="mt-6 flex flex-wrap gap-x-2.5 gap-y-1.5">
+              <div className="mt-6 flex flex-wrap gap-x-3 gap-y-2">
                 {c.tags.map((t) => (
-                  <span key={t} className="label text-[var(--faint)]">
+                  <span key={t} className="handtag">
                     {t}
                   </span>
                 ))}

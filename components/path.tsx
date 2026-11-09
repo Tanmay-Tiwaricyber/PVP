@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { useRef } from "react";
 import { timeline, awards } from "@/lib/site";
 import ChapterHead from "./chapter-head";
+import { RuledLine } from "./squiggle";
 
 export default function Path() {
   const ref = useRef<HTMLDivElement>(null);
@@ -56,7 +57,8 @@ export default function Path() {
         </div>
 
         {/* honours, as a ticker of record */}
-        <div className="marquee-host mt-10 overflow-hidden border-y border-[var(--rule)] py-3">
+        <RuledLine className="mt-10 opacity-70" />
+        <div className="marquee-host overflow-hidden py-3">
           <div className="marquee-track" style={{ ["--dur" as string]: "52s" }}>
             {[...awards, ...awards].map((a, i) => (
               <span key={`${a}-${i}`} className="flex shrink-0 items-center">
@@ -66,6 +68,7 @@ export default function Path() {
             ))}
           </div>
         </div>
+        <RuledLine className="opacity-70" />
       </div>
     </section>
   );

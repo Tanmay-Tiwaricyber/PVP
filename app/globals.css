@@ -353,6 +353,130 @@ body {
   transition: transform 0.42s var(--ease-out-expo), width 0.42s var(--ease-out-expo);
 }
 
+
+/* ==========================================================================
+   The pencil layer.
+   `[data-pencil]` is set on <html> by components/doodle.tsx. Everything drawn
+   as a stroke can opt into the hand filter; nothing typographic ever does.
+   ========================================================================== */
+
+/* A filter rasterises what it is applied to, and each filtered element costs a
+   noise pass — so the hand goes on hairlines and small strokes only, never on a
+   section that holds type. The big chapter rules are drawn as real paths
+   (components/squiggle.tsx) instead. */
+[data-pencil="on"] .rule {
+  filter: url(#pencil);
+  background: color-mix(in srgb, var(--ink) 26%, transparent);
+}
+[data-pencil="on"] .rule,
+[data-pencil="on"] .hand-rule {
+  position: relative;
+}
+
+/* the drawn plates are the one place the wobble earns its cost: their strokes
+   are the point of the figure */
+[data-pencil="on"] .plate-frame svg {
+  filter: url(#pencil-soft);
+}
+
+/* pencil-off: the engraved version, exactly as before */
+[data-pencil="off"] .pencil-only,
+.pencil-off .pencil-only {
+  display: none !important;
+}
+
+/* ---------- Highlighter ---------- */
+
+.mark {
+  position: relative;
+  display: inline;
+  z-index: 1;
+}
+.mark > span {
+  position: relative;
+  z-index: 2;
+}
+/* a swipe of highlighter under a display word, sized in ems so it scales */
+.mark::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: -0.06em;
+  right: -0.1em;
+  bottom: 0.04em;
+  height: 0.42em;
+  transform: rotate(-1.2deg) skewX(-8deg);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--accent) 20%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 32%, transparent) 46%,
+    color-mix(in srgb, var(--accent) 16%, transparent) 100%
+  );
+  clip-path: polygon(1% 18%, 100% 0, 98% 88%, 0 100%);
+  mix-blend-mode: multiply;
+}
+.dark .mark::before {
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+/* ---------- Hand-set tags ---------- */
+
+.handtag {
+  position: relative;
+  isolation: isolate;
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.74rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  padding-inline: 0.1em;
+}
+.handtag::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.06em;
+  right: -0.06em;
+  bottom: 0.02em;
+  height: 0.52em;
+  transform: rotate(-0.9deg) skewX(-4deg);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--accent) 30%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 40%, transparent) 45%,
+    color-mix(in srgb, var(--accent) 24%, transparent) 100%
+  );
+  clip-path: polygon(0 26%, 100% 0, 97% 82%, 2% 100%);
+  mix-blend-mode: multiply;
+}
+.dark .handtag::after {
+  mix-blend-mode: screen;
+  opacity: 0.6;
+}
+
+/* ---------- Paper stock ---------- */
+
+/* faint ruled stock, only where a page would be lined */
+.paper-ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0 27px,
+    var(--rule) 27px 28px
+  );
+}
+
+/* torn top edge, for the colophon strip */
+.torn-t {
+  --tear: 7px;
+  clip-path: polygon(
+    0 0.6%, 3% 0, 7% 0.9%, 12% 0.2%, 18% 1%, 24% 0.3%, 31% 1.1%, 38% 0.4%,
+    45% 1%, 52% 0.2%, 59% 0.9%, 66% 0.3%, 73% 1%, 80% 0.4%, 87% 1.1%, 93% 0.3%,
+    98% 0.9%, 100% 0.2%, 100% 100%, 0 100%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

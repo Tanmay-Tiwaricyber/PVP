@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { profile } from "@/lib/site";
+import { Annotation, CoffeeRing, RuledLine } from "./squiggle";
 
 /**
  * The closing chapter of a printed book: the colophon. It states the contact
@@ -23,7 +24,7 @@ export default function Colophon() {
 
   return (
     <footer id="contact" className="rule-t">
-      <div className="shell py-14 sm:py-20">
+      <div className="shell relative py-14 sm:py-20">
         <div className="flex items-baseline justify-between border-b border-[var(--rule-strong)] pb-2.5">
           <span className="label text-[var(--ink)]">
             <span className="text-[var(--accent)]">07</span>
@@ -32,6 +33,8 @@ export default function Colophon() {
           </span>
           <span className="label hidden sm:block">End of volume one</span>
         </div>
+
+        <CoffeeRing className="pointer-events-none absolute right-4 top-16 h-24 w-24 opacity-40 sm:right-10 sm:h-32 sm:w-32" />
 
         <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-7">
@@ -164,6 +167,8 @@ export default function Colophon() {
         </div>
       </div>
 
+      <RuledLine className="opacity-60" />
+
       {/* the signature mark at the very bottom */}
       <div className="relative overflow-hidden border-t border-[var(--rule)]">
         <p
@@ -172,6 +177,12 @@ export default function Colophon() {
         >
           Tanmay Tiwari
         </p>
+        <Annotation
+          className="absolute bottom-2 right-[var(--gutter)] hidden text-[0.72rem] opacity-70 sm:block"
+          rotate={-3}
+        >
+          drawn by hand, in Kanpur
+        </Annotation>
       </div>
     </footer>
   );
