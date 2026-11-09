@@ -38,7 +38,7 @@ export default function RevealText({
           key={`${word}-${i}`}
           aria-hidden
           className="inline-block overflow-hidden align-bottom"
-          style={{ paddingBottom: "0.08em", marginBottom: "-0.08em" }}
+          style={{ paddingBottom: "0.2em", marginBottom: "-0.2em" }}
         >
           <motion.span
             className="inline-block will-change-transform"

@@ -3,6 +3,7 @@ import Hero from "@/components/hero";
 import Marquee from "@/components/marquee";
 import Stats from "@/components/stats";
 import Work from "@/components/work";
+import CaseStudy from "@/components/case-study";
 import Craft from "@/components/craft";
 import Archive from "@/components/archive";
 import Path from "@/components/path";
@@ -49,6 +50,7 @@ export default function Home() {
         <Marquee />
         <Stats />
         <Work />
+        <CaseStudy />
         <Craft />
         <Archive />
         <Path />

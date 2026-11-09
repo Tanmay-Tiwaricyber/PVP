@@ -151,7 +151,7 @@ export default function Contact() {
       <div className="relative w-full overflow-hidden">
         <p
           aria-hidden
-          className="display -mb-[1.2vw] w-full select-none whitespace-nowrap text-center text-[19.2vw] leading-[0.72] text-bone/[0.045]"
+          className="display -mt-[1vw] -mb-[1.4vw] w-full select-none whitespace-nowrap text-center text-[13.6vw] leading-[0.78] text-bone/[0.045]"
         >
           TANMAY TIWARI
         </p>
