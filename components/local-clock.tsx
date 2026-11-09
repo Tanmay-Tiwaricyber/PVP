@@ -9,19 +9,18 @@ export default function LocalClock({ className }: { className?: string }) {
     const fmt = new Intl.DateTimeFormat("en-GB", {
       hour: "2-digit",
       minute: "2-digit",
-      second: "2-digit",
       hour12: false,
       timeZone: "Asia/Kolkata",
     });
     const update = () => setTime(fmt.format(new Date()));
     update();
-    const id = window.setInterval(update, 1000);
+    const id = window.setInterval(update, 20000);
     return () => window.clearInterval(id);
   }, []);
 
   return (
-    <span className={className}>
-      {time ? `${time} IST` : "IST (UTC+5:30)"}
+    <span className={className} aria-label="Local time in Kanpur, India">
+      {time ? `${time} IST · Kanpur` : "IST · Kanpur"}
     </span>
   );
 }

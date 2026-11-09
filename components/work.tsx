@@ -3,208 +3,152 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { projects } from "@/lib/site";
-import ProjectVisual from "./project-visual";
-import RevealText from "./reveal-text";
-import FadeIn from "./fade-in";
+import ChapterHead from "./chapter-head";
+import Plate from "./plate";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function Work() {
   const [active, setActive] = useState(0);
-  const project = projects[active];
+  const p = projects[active];
 
   return (
-    <section id="work" className="relative py-[clamp(4rem,9vw,8rem)]">
+    <section id="work" className="rule-t py-14 sm:py-20">
       <div className="shell">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-6 border-b border-bone/10 pb-7">
-          <div>
-            <FadeIn>
-              <p className="label mb-4">/ Selected work · 06</p>
-            </FadeIn>
-            <RevealText as="h2" className="display text-[clamp(2.4rem,7vw,6rem)]">
-              Things that ship.
-            </RevealText>
-          </div>
-          <FadeIn delay={0.15} className="max-w-xs">
-            <p className="font-mono text-[10px] uppercase leading-[1.9] tracking-[0.15em] text-bone/40">
-              Hover to preview · click to open the repository. Every entry is public
-              and deployed or runnable.
-            </p>
-          </FadeIn>
-        </div>
+        <ChapterHead
+          no="02"
+          title="Selected work"
+          accentWord="work"
+          aside="Six of one hundred and seventy-five"
+          lede="Everything here is public and either deployed or runnable. Hover an entry to pull its plate."
+        />
 
-        {/* Desktop editorial index */}
-        <div className="hidden lg:grid lg:grid-cols-12 lg:gap-10">
-          <div className="col-span-7">
-            {projects.map((p, i) => {
-              const isActive = i === active;
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
+          {/* the index */}
+          <div className="lg:col-span-7">
+            {projects.map((proj, i) => {
+              const on = i === active;
               return (
-                <button
-                  key={p.title}
-                  onMouseEnter={() => {
-                    setActive(i);
-                  }}
+                <a
+                  key={proj.title}
+                  href={proj.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
-                  onClick={() => window.open(p.repo, "_blank", "noopener")}
-                  className="group relative block w-full border-b border-bone/10 py-5 text-left first:border-t"
-                  aria-label={`${p.title} — ${p.tagline}`}
+                  className="group relative grid grid-cols-[2.2rem_1fr_auto] items-baseline gap-3 border-b border-[var(--rule)] py-4 sm:grid-cols-[3rem_1fr_auto] sm:py-5"
+                  aria-label={`${proj.title} — ${proj.kicker}`}
                 >
-                  <div className="flex items-baseline gap-5">
-                    <span
-                      className="font-mono text-[10px] tracking-widest transition-colors"
-                      style={{ color: isActive ? p.accent : "rgba(242,239,230,0.28)" }}
-                    >
-                      {p.index}
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-3">
-                        <h3
-                          className={`display text-[clamp(1.5rem,2.6vw,2.5rem)] transition-all duration-500 ${
-                            isActive ? "text-bone" : "text-bone/45 group-hover:text-bone/80"
-                          }`}
-                          style={{
-                            transform: isActive ? "translateX(10px)" : "translateX(0)",
-                          }}
-                        >
-                          {p.title}
-                        </h3>
-                        <span
-                          className="transition-all duration-500"
-                          style={{
-                            color: p.accent,
-                            opacity: isActive ? 1 : 0,
-                            transform: isActive ? "translateX(0)" : "translateX(-8px)",
-                          }}
-                        >
-                          ↗
-                        </span>
-                      </div>
-                      <p
-                        className={`mt-1.5 pl-1 text-[0.82rem] leading-relaxed transition-colors duration-300 ${
-                          isActive ? "text-bone/60" : "text-bone/45"
+                  <span
+                    className={`num text-[0.6rem] transition-colors ${
+                      on ? "text-[var(--accent)]" : "text-[var(--faint)]"
+                    }`}
+                  >
+                    {proj.index}
+                  </span>
+                  <span className="min-w-0">
+                    <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span
+                        className={`display text-[clamp(1.6rem,3.6vw,2.9rem)] transition-colors duration-300 ${
+                          on ? "text-[var(--ink)]" : "text-[var(--ink)]/55"
                         }`}
                       >
-                        {p.tagline}
-                      </p>
-                    </div>
-                    <div className="hidden shrink-0 text-right xl:block">
-                      <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45">
-                        {p.year}
-                      </p>
-                      <p className="mt-1 font-mono text-[9px] uppercase tracking-[0.18em] text-bone/40">
-                        {p.metric}
-                      </p>
-                    </div>
-                  </div>
+                        {proj.title}
+                      </span>
+                      <span className="serif-italic text-[0.95rem] text-[var(--muted)]">
+                        {proj.kicker}
+                      </span>
+                    </span>
+                    <span className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+                      {proj.stack.map((s) => (
+                        <span key={s} className="label">
+                          {s}
+                        </span>
+                      ))}
+                      <span className="label text-[var(--faint)]">· {proj.metric}</span>
+                    </span>
+                  </span>
                   <span
-                    className="absolute bottom-0 left-0 h-px transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                    style={{ width: isActive ? "100%" : "0%", background: p.accent }}
+                    className={`num self-center text-[10px] transition-all duration-500 ${
+                      on ? "translate-x-0 text-[var(--accent)] opacity-100" : "-translate-x-1 opacity-0"
+                    }`}
+                  >
+                    ↗
+                  </span>
+                  <span
+                    className="absolute bottom-0 left-0 h-px bg-[var(--accent)] transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                    style={{ width: on ? "100%" : "0%" }}
                   />
-                </button>
+                </a>
               );
             })}
           </div>
 
-          {/* Sticky preview card */}
-          <div className="col-span-5">
-            <div className="sticky top-24">
-              <div className="relative aspect-[5/4] max-h-[54vh] w-full overflow-hidden rounded-[4px] border border-bone/10">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={project.title}
-                    initial={{ opacity: 0, scale: 1.04 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.99 }}
-                    transition={{ duration: 0.55, ease: EASE }}
-                    className="absolute inset-0"
-                  >
-                    <ProjectVisual project={project} />
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+          {/* the plate */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-24">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={p.title}
+                  initial={{ opacity: 0, scale: 0.985 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.45, ease: EASE }}
+                >
+                  <Plate figure={p.figure} />
+                </motion.div>
+              </AnimatePresence>
 
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 10 }}
+                  key={p.title}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.45, ease: EASE }}
-                  className="mt-5"
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: EASE }}
+                  className="mt-4"
                 >
-                  <div className="flex items-center justify-between">
-                    <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-bone/40">
-                      {project.kind}
+                  <div className="flex items-baseline justify-between gap-4 border-b border-[var(--rule)] pb-2">
+                    <p className="label text-[var(--ink)]">
+                      Fig. {p.index} — {p.title}
                     </p>
-                    <a
-                      href={project.live ?? project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="link-u font-mono text-[9px] uppercase tracking-[0.2em] text-acid"
-                    >
-                      {project.live ? "Live site" : "Repository"}
-                    </a>
+                    <p className="label">{p.year}</p>
                   </div>
-                  <p className="measure mt-3 text-[0.88rem] leading-relaxed text-bone/60">
-                    {project.summary}
+                  <p className="mt-3 text-[0.88rem] leading-relaxed text-[var(--muted)]">
+                    {p.summary}
                   </p>
-                  <ul className="mt-4 space-y-1.5">
-                    {project.points.map((pt) => (
-                      <li key={pt} className="flex gap-2 text-[0.78rem] leading-snug text-bone/40">
-                        <span style={{ color: project.accent }}>—</span>
+                  <ul className="mt-3 space-y-1">
+                    {p.points.map((pt) => (
+                      <li key={pt} className="flex gap-2 text-[0.78rem] leading-snug text-[var(--muted)]">
+                        <span className="text-[var(--accent)]">·</span>
                         <span>{pt}</span>
                       </li>
                     ))}
                   </ul>
+                  <div className="mt-4 flex items-center gap-5">
+                    <a
+                      href={p.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="meta link-u text-[var(--ink)] hover:text-[var(--accent)]"
+                    >
+                      Source ↗
+                    </a>
+                    {p.live && (
+                      <a
+                        href={p.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="meta link-u text-[var(--accent)]"
+                      >
+                        Live ↗
+                      </a>
+                    )}
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
-        </div>
-
-        {/* Mobile / tablet cards */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:hidden">
-          {projects.map((p, i) => (
-            <motion.a
-              key={p.title}
-              href={p.repo}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-8%" }}
-              transition={{ duration: 0.7, delay: (i % 2) * 0.08, ease: EASE }}
-              className="group flex flex-col overflow-hidden rounded-[3px] border border-bone/10"
-            >
-              <div className="aspect-[4/3] w-full">
-                <ProjectVisual project={p} />
-              </div>
-              <div className="flex flex-1 flex-col justify-between p-4">
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono text-[9px]" style={{ color: p.accent }}>
-                      {p.index}
-                    </span>
-                    <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-bone/45">
-                      {p.year}
-                    </span>
-                  </div>
-                  <h3 className="display mt-2 text-[1.35rem]">{p.title}</h3>
-                  <p className="mt-1.5 text-[0.8rem] leading-relaxed text-bone/45">{p.tagline}</p>
-                </div>
-                <div className="mt-4 flex flex-wrap gap-1.5">
-                  {p.stack.slice(0, 3).map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-bone/15 px-2 py-0.5 font-mono text-[8px] uppercase tracking-wider text-bone/40"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.a>
-          ))}
         </div>
       </div>
     </section>

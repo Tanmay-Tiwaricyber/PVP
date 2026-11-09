@@ -1,30 +1,29 @@
 import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/jetbrains-mono";
+import "@fontsource/instrument-serif/400.css";
 import "@fontsource/instrument-serif/400-italic.css";
 import "./globals.css";
 import SmoothScroll from "@/components/smooth-scroll";
-import Cursor from "@/components/cursor";
 import Preloader from "@/components/preloader";
 import Grain from "@/components/grain";
 import MotionProvider from "@/components/motion-provider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://tanmaytiwari.vercel.app",
-  ),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tanmay-portfolio-mu.vercel.app"),
   title: {
     default: "Tanmay Tiwari — Silent Programmer",
     template: "%s — Tanmay Tiwari",
   },
   description:
-    "Tanmay Tiwari is a full-stack engineer and cybersecurity builder in Kanpur, India. 175 public repositories, 435 stars, shipped work in AI tooling, systems and interface design.",
+    "Tanmay Tiwari is a full-stack engineer and security builder in Kanpur, India. 175 public repositories, top 1% on TryHackMe, and work spanning native systems, AI tooling and interface design.",
   keywords: [
     "Tanmay Tiwari",
     "Silent Programmer",
     "portfolio",
     "full stack developer Kanpur",
     "cybersecurity engineer India",
+    "TryHackMe top 1%",
     "Next.js portfolio",
     "open source developer",
   ],
@@ -33,34 +32,44 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "/",
     siteName: "Tanmay Tiwari",
     title: "Tanmay Tiwari — Silent Programmer",
     description:
-      "Full-stack engineer & cybersecurity builder. AI tooling, systems, and interfaces with a point of view.",
+      "Full-stack engineer & security builder. Top 1% on TryHackMe. Native systems, AI tooling, interfaces with a point of view.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Tanmay Tiwari — Silent Programmer",
-    description: "Full-stack engineer & cybersecurity builder. Interfaces with a point of view.",
+    description: "Full-stack engineer & security builder. Top 1% on TryHackMe.",
   },
   robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#07070a",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2efe7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b0c" },
+  ],
   width: "device-width",
   initialScale: 1,
 };
 
+/**
+ * Runs before paint: no flash of the wrong theme.
+ * Default is Paper (light) unless the visitor has chosen otherwise or the OS
+ * explicitly prefers dark and they have made no choice yet.
+ */
+const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}var r=document.documentElement;r.dataset.theme=t;r.classList.toggle('dark',t==='dark');}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <MotionProvider>
           <Grain />
-          <Cursor />
           <SmoothScroll />
           <Preloader />
           {children}
