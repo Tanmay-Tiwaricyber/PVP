@@ -477,6 +477,133 @@ body {
   );
 }
 
+
+/* ==========================================================================
+   INSIDE THE MACHINE
+   The canvas is fixed at z0 behind the document. When it is live the volume
+   turns to near-black glass with one acid accent, and every chapter becomes a
+   sheet laid over the machine rather than a page in a book.
+   ========================================================================== */
+
+html.machine {
+  --paper: #05070a;
+  --paper-2: #0a0f13;
+  --ink: #eaf6ec;
+  --muted: #9fb0a8;
+  --faint: #6f817a;
+  --rule: rgba(214, 255, 226, 0.12);
+  --rule-strong: rgba(214, 255, 226, 0.3);
+  --accent: #b6ff3c;
+  --accent-2: #7fd4ff;
+  --ochre: #d7c06a;
+  --sage: #8fd6a8;
+  --invert: #b6ff3c;
+  --invert-ink: #05070a;
+  --mark: rgba(214, 255, 226, 0.35);
+  --noise: 0.035;
+  color-scheme: dark;
+}
+
+html.machine,
+html.machine body {
+  background: transparent;
+}
+
+/* Legibility is the machine's own occlusion: each chapter fades in from
+   transparent, which reveals the canvas behind it. No blur, no glass per
+   section — the darkness is the shader's, not a scrim's. */
+html.machine #main > section {
+  position: relative;
+  background:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      color-mix(in srgb, #04060a 88%, transparent) 5%,
+      color-mix(in srgb, #04060a 94%, transparent) 50%,
+      color-mix(in srgb, #04060a 88%, transparent) 95%,
+      transparent 100%
+    );
+}
+html.machine #main > section:first-child {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 55%,
+    color-mix(in srgb, #04060a 92%, transparent) 100%
+  );
+}
+/* the figure must stay a figure: extra darkness where the type sits */
+html.machine #main > section > .shell {
+  position: relative;
+}
+
+/* the doodles belong to the paper volume, not to the machine */
+html.machine .pencil-only,
+html.machine .crop,
+html.machine .halftone,
+html.machine .mark::before,
+html.machine .handtag::after {
+  display: none !important;
+}
+
+/* the CSS monolith, shown until the canvas draws, and on reduced motion */
+.static-monolith {
+  width: min(38vw, 23rem);
+  aspect-ratio: 2.55 / 3.7;
+  margin-inline: auto;
+  border-radius: 1.4rem;
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 20% 0%, rgba(182, 255, 60, 0.16), transparent 60%),
+    radial-gradient(90% 70% at 90% 100%, rgba(127, 212, 255, 0.14), transparent 60%),
+    linear-gradient(150deg, rgba(20, 30, 24, 0.92), rgba(6, 10, 12, 0.96));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 40px 120px -30px rgba(0, 0, 0, 0.9),
+    0 0 90px -40px rgba(182, 255, 60, 0.5);
+  backdrop-filter: blur(10px) saturate(120%);
+  border: 1px solid rgba(214, 255, 226, 0.14);
+  overflow: hidden;
+}
+.static-monolith::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.1) 45%, transparent 60%);
+  transform: translateX(-30%);
+}
+
+@keyframes spark {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--dx), var(--dy), 0) scale(0.2);
+    opacity: 0;
+  }
+}
+
+/* the magnetic button leans into the cursor */
+[data-magnetic] {
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* HUD — mono labels that are allowed to be tiny */
+.hud {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+
+html.machine ::selection {
+  background: var(--accent);
+  color: #05070a;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -2,17 +2,24 @@
 
 import { motion } from "motion/react";
 import { capabilities } from "@/lib/site";
-import ChapterHead from "./chapter-head";
+import LayerHead from "./machine/layer-head";
 
 export default function Craft() {
   return (
-    <section id="craft" className="rule-t py-14 sm:py-20">
+    <section
+      id="craft"
+      data-cam="-0.7,-3.6,4.4|-0.2,-3.9,-2.2"
+      data-layer="L1 · BROWSER"
+      data-depth="0070 m"
+      className="rule-t py-14 sm:py-20"
+    >
       <div className="shell">
-        <ChapterHead
-          no="03"
+        <LayerHead
+          layer="L1 — L4"
+          depth="the whole stack"
+          name="One machine, four layers"
           title="How I work"
           accentWord="work"
-          aside="Four disciplines, one instinct"
           lede="I move between the browser, the kernel boundary and the security model without treating them as separate careers. The through-line: understand the machine, then remove what the user does not need."
         />
 

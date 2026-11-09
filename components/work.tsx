@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { projects } from "@/lib/site";
-import ChapterHead from "./chapter-head";
+import LayerHead from "./machine/layer-head";
 import Plate from "./plate";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -13,13 +13,20 @@ export default function Work() {
   const p = projects[active];
 
   return (
-    <section id="work" className="rule-t py-14 sm:py-20">
+    <section
+      id="work"
+      data-cam="1.1,-2.7,4.6|0.2,-3.0,-1.6"
+      data-layer="L1 · BROWSER"
+      data-depth="0120 m"
+      className="rule-t py-14 sm:py-20"
+    >
       <div className="shell">
-        <ChapterHead
-          no="02"
+        <LayerHead
+          layer="L1 · Browser"
+          depth="012 m"
+          name="Product engineering"
           title="Selected work"
           accentWord="work"
-          aside="Six of one hundred and seventy-five"
           lede="Everything here is public and either deployed or runnable. Hover an entry to pull its plate."
         />
 

@@ -1,12 +1,16 @@
 import SiteHeader from "@/components/site-header";
-import Cover from "@/components/cover";
+import Machine from "@/components/machine/machine";
+import MachineHero from "@/components/machine/hero";
+import StaticMonolith from "@/components/machine/static-monolith";
 import Work from "@/components/work";
 import Craft from "@/components/craft";
 import Security from "@/components/security";
 import Path from "@/components/path";
+import SiliconChapter from "@/components/machine/silicon-chapter";
 import Archive from "@/components/archive";
 import Colophon from "@/components/colophon";
 import Ledger from "@/components/ledger";
+import ReturnButton from "@/components/machine/return";
 import { profile, stats, thm } from "@/lib/site";
 
 export default function Home() {
@@ -55,21 +59,27 @@ export default function Home() {
       />
       <a
         href="#work"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:border focus:border-[var(--ink)] focus:bg-[var(--paper)] focus:px-3 focus:py-2 focus:text-[var(--ink)]"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:border focus:border-[var(--accent)] focus:bg-[#05070a] focus:px-3 focus:py-2 focus:text-[var(--accent)]"
       >
         Skip to content
       </a>
+
       <SiteHeader />
-      <main id="main">
-        <Cover />
-        <Ledger stats={stats} />
-        <Work />
-        <Craft />
-        <Security />
-        <Path />
-        <Archive />
-        <Colophon />
-      </main>
+
+      <Machine idle={<StaticMonolith />}>
+        <main id="main" className="relative z-10">
+          <MachineHero />
+          <Work />
+          <Craft />
+          <Security />
+          <Path />
+          <SiliconChapter />
+          <Archive />
+          <Ledger stats={stats} />
+          <ReturnButton />
+          <Colophon />
+        </main>
+      </Machine>
     </>
   );
 }

@@ -8,7 +8,13 @@ type Stat = { value: number; label: string; note: string };
  */
 export default function Ledger({ stats }: { stats: Stat[] }) {
   return (
-    <section id="record" className="rule-t py-10 sm:py-14">
+    <section
+      id="record"
+      data-cam="0.8,-0.9,7.0|0.2,-1.1,-0.4"
+      data-layer="THE RECORD"
+      data-depth="0002 m"
+      className="rule-t py-10 sm:py-14"
+    >
       <div className="shell">
         <div className="grid gap-6 sm:grid-cols-12 sm:gap-8">
           <div className="sm:col-span-3">

@@ -3,7 +3,6 @@
 import { motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./theme-toggle";
-import PencilToggle from "./pencil-toggle";
 import LocalClock from "./local-clock";
 import { chapters, profile } from "@/lib/site";
 import useIntro from "./use-intro";
@@ -31,7 +30,7 @@ export default function SiteHeader() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.9, delay: intro + 0.28, ease: [0.16, 1, 0.3, 1] }}
         className="fixed inset-x-0 top-0 z-50 backdrop-blur-[2px]"
-        style={{ backgroundColor: "color-mix(in srgb, var(--paper) 82%, transparent)" }}
+        style={{ backgroundColor: "color-mix(in srgb, var(--paper) 72%, transparent)" }}
       >
         <div className="shell">
           <div
@@ -64,7 +63,6 @@ export default function SiteHeader() {
               <span className="hidden xl:flex items-center gap-2">
                 <LocalClock className="meta text-[var(--faint)]" />
               </span>
-              <PencilToggle />
               <ThemeToggle />
               <button
                 onClick={() => setOpen((v) => !v)}
@@ -98,8 +96,8 @@ export default function SiteHeader() {
 
       {/* Mobile index sheet — a table of contents, not a fullscreen menu */}
       <div
-        className={`fixed inset-0 z-40 lg:hidden ${
-          open ? "pointer-events-auto" : "pointer-events-none"
+        className={`fixed inset-0 z-40 transition-[visibility] duration-300 lg:hidden ${
+          open ? "visible pointer-events-auto" : "invisible pointer-events-none"
         }`}
         aria-hidden={!open}
       >
