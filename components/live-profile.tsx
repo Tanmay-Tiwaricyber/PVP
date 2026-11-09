@@ -93,6 +93,24 @@ export default function LiveProfile() {
                 </a>
               </div>
 
+              {/* Public badge (S3, fetched by the browser): shows the real rank
+                  even when the profile API blocks datacenter traffic. */}
+              <div className="relative mt-6 w-full max-w-[268px]">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={tryhackme.badge}
+                  alt="TanmayTiwari's live TryHackMe badge — score and rank"
+                  width={268}
+                  height={64}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).style.display = "none";
+                  }}
+                  className="h-auto w-full opacity-90"
+                />
+              </div>
+
               <div className="relative mt-7 grid grid-cols-2 gap-5 border-t border-bone/10 pt-6 sm:grid-cols-3">
                 <div>
                   <p className="label mb-1.5">Rank</p>

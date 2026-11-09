@@ -10,10 +10,15 @@ function Counter({ to }: { to: number }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15% 0px" });
   const reduce = useReducedMotion();
-  const [value, setValue] = useState(0);
+  // SSR renders the real number so no-JS visitors and crawlers see the truth;
+  // after hydration, off-screen counters drop to 0 so they can animate in view.
+  const [value, setValue] = useState(to);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView) {
+      setValue(0);
+      return;
+    }
     if (reduce) {
       setValue(to);
       return;
