@@ -8,6 +8,8 @@ import SmoothScroll from "@/components/smooth-scroll";
 import Preloader from "@/components/preloader";
 import Grain from "@/components/grain";
 import MotionProvider from "@/components/motion-provider";
+import Doodle from "@/components/doodle";
+import Binding from "@/components/binding";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://tanmay-portfolio-mu.vercel.app"),
@@ -69,7 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <MotionProvider>
+          <Doodle />
           <Grain />
+          <Binding />
           <SmoothScroll />
           <Preloader />
           {children}

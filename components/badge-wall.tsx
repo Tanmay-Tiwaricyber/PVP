@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import { badges, type Badge } from "@/lib/badges";
 import BadgeArtMark from "./badge-art";
+import { Tape } from "./margin-notes";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
@@ -53,6 +54,8 @@ function Thumb({
           on ? "border-[var(--accent)] bg-[var(--accent)]" : "border-[var(--rule-strong)] bg-[var(--paper-2)]"
         }`}
       />
+      <Tape className="-left-2 -top-1" />
+      <Tape className="-right-2 -bottom-1" flip />
       <span
         className={`relative z-[1] flex items-center justify-center transition-all duration-500 ${
           on ? "scale-105 text-[var(--accent)]" : "text-[var(--ink)]"

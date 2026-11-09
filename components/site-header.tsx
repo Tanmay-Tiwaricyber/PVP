@@ -3,6 +3,7 @@
 import { motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
 import { useEffect, useState } from "react";
 import ThemeToggle from "./theme-toggle";
+import PencilToggle from "./pencil-toggle";
 import LocalClock from "./local-clock";
 import { chapters, profile } from "@/lib/site";
 import useIntro from "./use-intro";
@@ -63,6 +64,7 @@ export default function SiteHeader() {
               <span className="hidden xl:flex items-center gap-2">
                 <LocalClock className="meta text-[var(--faint)]" />
               </span>
+              <PencilToggle />
               <ThemeToggle />
               <button
                 onClick={() => setOpen((v) => !v)}

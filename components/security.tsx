@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { thm } from "@/lib/site";
 import ChapterHead from "./chapter-head";
+import { Circle } from "./squiggle";
 
 /**
  * The TryHackMe record, set as a dossier rather than a badge wall.
@@ -61,7 +62,9 @@ export default function Security() {
                     transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <dt className="label">{m.k}</dt>
-                    <dd className="num mt-1 text-[clamp(1.5rem,3vw,2.1rem)] leading-none">{m.v}</dd>
+                    <dd className="num mt-1 text-[clamp(1.5rem,3vw,2.1rem)] leading-none">
+                      {m.v === "Top 1%" ? <Circle className="pr-1">{m.v}</Circle> : m.v}
+                    </dd>
                     <dd className="label mt-1 text-[var(--faint)]">{m.note}</dd>
                   </motion.div>
                 ))}

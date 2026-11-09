@@ -6,6 +6,7 @@ import LocalClock from "./local-clock";
 import BadgeWall from "./badge-wall";
 import ThmSeal from "./thm-seal";
 import useIntro from "./use-intro";
+import { Arrow, RuledLine } from "./squiggle";
 import { profile } from "@/lib/site";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -32,6 +33,7 @@ export default function Cover() {
             <LocalClock />
           </p>
         </div>
+        <RuledLine className="-mt-[7px] opacity-60" />
 
         <div className="grid flex-1 grid-cols-1 items-center gap-y-8 py-6 lg:grid-cols-12 lg:gap-x-10">
           {/* ——— left: the title page ——— */}
@@ -66,8 +68,10 @@ export default function Cover() {
                 className="display flex flex-wrap items-baseline gap-x-[0.16em] text-[clamp(3.3rem,11.5vw,9.5rem)]"
               >
                 <span>Tiwari</span>
-                <span className="serif-italic text-[0.2em] leading-none text-[var(--accent)]">
-                  silent programmer
+                <span className="serif-italic relative z-[1] text-[0.2em] leading-none text-[var(--accent)]">
+                  <span className="mark">
+                    <span>silent programmer</span>
+                  </span>
                 </span>
               </motion.p>
             </div>
@@ -95,6 +99,8 @@ export default function Cover() {
                 top-1% security record, and a habit of shipping the hard part first.
               </p>
             </motion.div>
+
+            <Arrow className="absolute -right-16 bottom-24 hidden h-8 w-16 -scale-x-100 opacity-50 xl:block" />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.94, rotate: 0 }}

@@ -2,6 +2,8 @@
 
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { RuledLine } from "./squiggle";
+import MarginNotes from "./margin-notes";
 
 /**
  * Every chapter opens the same way: a numeral in the margin, a title set in
@@ -27,7 +29,8 @@ export default function ChapterHead({
   const parts = accentWord ? title.split(accentWord) : [title];
 
   return (
-    <div ref={ref} className="mb-8 sm:mb-12">
+    <div ref={ref} className="relative mb-8 sm:mb-12">
+      <MarginNotes />
       <div className="flex items-baseline justify-between border-b border-[var(--rule-strong)] pb-2.5">
         <span className="label text-[var(--ink)]">
           <span className="text-[var(--accent)]">{no}</span>
@@ -36,6 +39,7 @@ export default function ChapterHead({
         </span>
         {aside && <span className="label hidden text-right sm:block">{aside}</span>}
       </div>
+      <RuledLine className="-mt-[3px] opacity-70" />
 
       <div className="mt-5 grid gap-4 sm:grid-cols-12 sm:gap-6">
         <div className="sm:col-span-8">
